@@ -3,7 +3,8 @@
 
 set -e  # Exit if any subcommand fails.
 
-tools_bin_dir="$(dirname "$0")"
+this_script="$(realpath "$0")"
+tools_bin_dir="$(dirname "$this_script")"
 
 # Parse command line args.
 device="$1"
