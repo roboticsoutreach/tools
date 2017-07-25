@@ -1,0 +1,46 @@
+#!/bin/sh
+# mcv4-flash-fw: Flash the V4 motor board firmware over USB serial.
+
+set -e  # Exit if any subcommand fails.
+
+this_script="$(realpath "$0")"
+tools_bin_dir="$(dirname "$this_script")"
+tools_dir="$(dirname "$tools_bin_dir")"
+
+# Parse command line args.
+device="$1"
+image="$2"
+if [ -z "$device" -o -z "$image" ]; then
+  echo "Usage:"
+  echo "  $0 <device> <image>"
+  echo "Example:"
+  echo "  $0 /dev/ttyUSB0 mcv4.bin"
+  exit 1
+fi
+
+if [ ! -e "$device" ]; then
+  echo "error: $device does not exist (try power cycling the board)"
+  exit 1
+fi
+
+if [ ! -e "$image" ]; then
+  echo "error: $image does not exist"
+  exit 1
+fi
+
+# Check dependencies are available.
+have_stm32flash=$(which stm32flash 2>/dev/null || true)
+if [ -z "$have_stm32flash" ]; then
+  echo "error: 'stm32flash' command not found"
+  exit 1
+fi
+
+echo "Please ensure the board is powered on (both USB and 12V sides), then press the button on the side of the board."
+echo "Then press enter."
+read
+
+# Flash the board.
+echo "Flashing microcontroller..."
+sudo stm32flash -b 115200 -w "$image" -v "$device"
+
+echo "Success."

@@ -1,0 +1,39 @@
+#!/bin/sh
+# mcv4-flash-usbeeprom: Flash the FTDI chip EEPROM on a V4 motor board.
+
+set -e  # Exit if any subcommand fails.
+
+this_script="$(realpath "$0")"
+tools_bin_dir="$(dirname "$this_script")"
+tools_dir="$(dirname "$tools_bin_dir")"
+tools_share_dir="$tools_dir/share"
+
+# Parse command line args.
+serial_num="$1"
+
+# Check dependencies are available.
+have_ftdi_eeprom=$(which ftdi_eeprom 2>/dev/null || true)
+if [ -z "$have_ftdi_eeprom" ]; then
+  echo "error: 'ftdi_eeprom' command not found"
+  exit 1
+fi
+
+# If no serial number was specified, use a dummy value.
+if [ -z "$serial_num" ]; then
+  serial_num=XXXXXXXXXXXXXXX
+fi
+
+# Bake the serial number into the EEPROM config file.
+temp_conf_file=$(mktemp)
+sed "s/SERIAL/$serial_num/" "$tools_share_dir/mcv4_eeprom.conf.template" > "$temp_conf_file"
+
+# Flash the FTDI chip EEPROM.
+echo "Flashing FTDI EEPROM..."
+sudo ftdi_eeprom --flash-eeprom "$temp_conf_file"
+
+# Clean up baked config file.
+rm -f "$temp_conf_file"
+
+echo
+echo "Success."
+echo "You will need to unplug and re-plug the USB cable for the changes to take effect."
