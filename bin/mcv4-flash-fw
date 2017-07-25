@@ -35,10 +35,6 @@ if [ -z "$have_stm32flash" ]; then
   exit 1
 fi
 
-echo "Please ensure the board is powered on (both USB and 12V sides), then press the button on the side of the board."
-echo "Then press enter."
-read
-
 # Flash the board.
 echo "Flashing microcontroller..."
 sudo stm32flash -b 115200 -w "$image" -v "$device"

@@ -36,6 +36,7 @@ Prerequisites:
 * Connect the board to the computer over USB.
   * It has been observed that sometimes it becomes impossible to download firmware to the board after having flashed the USB chip EEPROM. I'm not sure why this happens, but it can be worked around by flashing the firmware over UART instead. Connect a USB-to-serial cable to the 4-pin serial header on the board (TODO: pinout?) *instead of* connecting the board over USB. Connecting a USB cable and serial cable at the same time can damage the board and/or your computer, as the two cables will try to drive the board's power supply rail to different voltages!
 * Power the board through its 12V terminals.
+* Press the button on the side of the board.
 
 ```bash
 bin/mcv4-flash-fw /path/to/usb/serial/device /path/to/mcv4.bin
