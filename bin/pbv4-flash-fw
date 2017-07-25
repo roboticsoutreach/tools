@@ -10,9 +10,9 @@ tools_bin_dir="$(dirname "$this_script")"
 device="$1"
 image="$2"
 serial_num="$3"
-if [ -z "$device" -o -z "$image" ]; then
+if [ -z "$device" -o -z "$image" -o -z "$serial_num" ]; then
   echo "Usage:"
-  echo "  $0 <device> <image> [<serial_num>]"
+  echo "  $0 <device> <image> <serial_num>"
   echo "Example:"
   echo "  $0 /dev/ttyUSB0 pbv4.bin 12-34-56-78"
   exit 1
@@ -39,19 +39,14 @@ if [ -z "$have_perl" -a -n "$serial_num" ]; then
   echo "error: 'perl' command not found"
 fi
 
-# If a serial number was specified, bake it into the image.
-if [ -n "$serial_num" ]; then
-  baked_image="$(mktemp)"
-  "$tools_bin_dir/pbv4-bake-serial-num" "$serial_num" < "$image" > "$baked_image"
-  image="$baked_image"
-fi
+# Bake serial number into image.
+baked_image="$(mktemp)"
+"$tools_bin_dir/pbv4-bake-serial-num" "$serial_num" < "$image" > "$baked_image"
 
 # Flash the board.
-sudo stm32flash -b 115200 -w "$image" -v "$device"
+sudo stm32flash -b 115200 -w "$baked_image" -v "$device"
 
-# Clean up the temporary baked image, if necessary.
-if [ -n "$serial_num" ]; then
-  rm -f "$baked_image"
-fi
+# Clean up the temporary baked image.
+rm -f "$baked_image"
 
 echo "Success."
