@@ -64,3 +64,22 @@ For example:
 ```base
 bin/mcv4-flash-usbeeprom 12-34-56-78
 ```
+
+## Flashing a V4 servo board
+
+Prerequisites:
+
+* Install `stm32flash`.
+* Build the firmware from the `servo-v4-fw` repository, producing the `sbv4.bin` firmware image.
+* Connect the board to the computer via a USB-to-serial cable plugged into the UART port. (TODO: pinout?)
+* Power the board through its USB connection.
+
+```bash
+bin/sbv4-flash-fw /path/to/usb/serial/device /path/to/sbv4.bin SERIAL_NUM
+```
+
+For example:
+
+```bash
+bin/sbv4-flash-fw /dev/ttyUSB0 ./sbv4.bin 12-34-56-78
+```
