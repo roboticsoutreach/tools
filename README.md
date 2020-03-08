@@ -7,7 +7,7 @@ This README should document how to use each script, unless the script is large o
 ## Flashing a V4 power board
 
 * Install `stm32flash`.
-* Build the firmware from the `power-v4-fw` repository, producing the `pbv4.bin` firmware image.
+* Build the firmware from the [power-v4-fw][] repository, producing the `pbv4.bin` firmware image.
 * Connect the board to the computer via a USB-to-serial cable plugged into the 6-pin header in the corner, following [this pinout diagram](doc/pbv4-pinout.jpg).
 * Ensure the external power switch pins are shorted.
 * Power the board through its 12V terminals.
@@ -32,7 +32,7 @@ This is a two-step process - one to configure the builtin USB interface IC and a
 
 * Install `stm32flash`.
 * Install `libftdi1`, which provides the `ftdi_eeprom` tool.
-* Build the firmware from the `motor-v4-fw` repository, producing the `mcv4.bin` firmware image.
+* Build the firmware from the [motor-v4-fw][] repository, producing the `mcv4.bin` firmware image.
 * Connect the board to the computer over USB.
   * It has been observed that sometimes it becomes impossible to download firmware to the board after having flashed the USB chip EEPROM. I'm not sure why this happens, but it can be worked around by flashing the firmware over UART instead. Connect a USB-to-serial cable to the 4-pin serial header on the board (TODO: pinout?) *instead of* connecting the board over USB. Connecting a USB cable and serial cable at the same time can damage the board and/or your computer, as the two cables will try to drive the board's power supply rail to different voltages!
 * Power the board through its 12V terminals.
@@ -69,7 +69,7 @@ bin/mcv4-flash-usbeeprom SRO-AA2-3EB
 ## Flashing a V4 servo board
 
 * Install `stm32flash` and `pyserial`.
-* Build the firmware from the `servo-v4-fw` repository, producing the `sbv4.bin` firmware image.
+* Build the firmware from the [servo-v4-fw][] repository, producing the `sbv4.bin` firmware image.
 * Connect the board to the computer via a USB-to-serial cable plugged into the UART port, following [this pinout diagram](doc/sbv4-pinout.jpg).
 * Power the board through the USB port.
 * Run `bin/sbv4-flash-fw` as described below, pressing the button on the side of the board when instructed.
@@ -86,3 +86,7 @@ For example:
 ```bash
 bin/sbv4-flash-fw /dev/ttyUSB0 ./sbv4.bin SRO-AA2-3EB
 ```
+
+[power-v4-fw]: https://github.com/srobo/power-v4-fw
+[motor-v4-fw]: https://github.com/srobo/motor-v4-fw
+[servo-v4-fw]: https://github.com/srobo/servo-v4-fw
