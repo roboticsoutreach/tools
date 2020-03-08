@@ -61,7 +61,7 @@ bin/mcv4-flash-usbeeprom SERIAL_NUM
 
 For example:
 
-```base
+```bash
 bin/mcv4-flash-usbeeprom 12-34-56-78
 ```
 
