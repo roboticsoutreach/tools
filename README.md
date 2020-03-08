@@ -9,6 +9,7 @@ This README should document how to use each script, unless the script is large o
 * Install `stm32flash`.
 * Build the firmware from the `power-v4-fw` repository, producing the `pbv4.bin` firmware image.
 * Connect the board to the computer via a USB-to-serial cable plugged into the 6-pin header in the corner. (TODO: pinout?)
+* Ensure the external power switch pins are shorted.
 * Power the board through its 12V terminals.
 * Run `bin/pbv4-flash-fw` as described below.
 * Power-cycle the board to boot the new firmware.
