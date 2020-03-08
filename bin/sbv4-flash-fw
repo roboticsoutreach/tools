@@ -1,5 +1,5 @@
 #!/bin/sh
-# pbv4-flash-uart: Flash a V4 power board using a USB-to-serial cable.
+# sbv4-flash-uart: Flash a V4 servo board using a USB-to-serial cable.
 
 set -e  # Exit if any subcommand fails.
 
@@ -14,7 +14,7 @@ if [ -z "$device" -o -z "$image" -o -z "$serial_num" ]; then
   echo "Usage:"
   echo "  $0 <device> <image> <serial_num>"
   echo "Example:"
-  echo "  $0 /dev/ttyUSB0 pbv4.bin 12-34-56-78"
+  echo "  $0 /dev/ttyUSB0 sbv4.bin 12-34-56-78"
   exit 1
 fi
 
@@ -44,7 +44,7 @@ baked_image="$(mktemp)"
 "$tools_bin_dir/bake-serial-num" "$serial_num" < "$image" > "$baked_image"
 
 # Flash the board.
-sudo stm32flash -b 115200 -w "$baked_image" -v "$device"
+sudo stm32flash -b 57600 -w "$baked_image" -v "$device"
 
 # Clean up the temporary baked image.
 rm -f "$baked_image"
