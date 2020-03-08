@@ -72,7 +72,7 @@ Prerequisites:
 * Install `stm32flash`.
 * Build the firmware from the `servo-v4-fw` repository, producing the `sbv4.bin` firmware image.
 * Connect the board to the computer via a USB-to-serial cable plugged into the UART port. (TODO: pinout?)
-* Power the board through its USB connection.
+* Power the board through the UART port (not the USB port or the 12V port).
 
 ```bash
 bin/sbv4-flash-fw /path/to/usb/serial/device /path/to/sbv4.bin SERIAL_NUM
