@@ -20,7 +20,7 @@ bin/pbv4-flash-fw /path/to/usb/serial/device /path/to/pbv4.bin SERIAL_NUM
 For example:
 
 ```bash
-bin/pbv4-flash-fw /dev/ttyUSB0 ./pbv4.bin 12-34-56-78
+bin/pbv4-flash-fw /dev/ttyUSB0 ./pbv4.bin SRO-AA2-3EB
 ```
 
 ## Flashing a V4 motor board
@@ -62,7 +62,7 @@ bin/mcv4-flash-usbeeprom SERIAL_NUM
 For example:
 
 ```bash
-bin/mcv4-flash-usbeeprom 12-34-56-78
+bin/mcv4-flash-usbeeprom SRO-AA2-3EB
 ```
 
 ## Flashing a V4 servo board
@@ -81,5 +81,5 @@ bin/sbv4-flash-fw /path/to/usb/serial/device /path/to/sbv4.bin SERIAL_NUM
 For example:
 
 ```bash
-bin/sbv4-flash-fw /dev/ttyUSB0 ./sbv4.bin 12-34-56-78
+bin/sbv4-flash-fw /dev/ttyUSB0 ./sbv4.bin SRO-AA2-3EB
 ```
