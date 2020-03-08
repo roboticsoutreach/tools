@@ -65,11 +65,11 @@ bin/mcv4-flash-usbeeprom SRO-AA2-3EB
 
 ## Flashing a V4 servo board
 
-* Install `stm32flash`.
+* Install `stm32flash` and `pyserial`.
 * Build the firmware from the `servo-v4-fw` repository, producing the `sbv4.bin` firmware image.
 * Connect the board to the computer via a USB-to-serial cable plugged into the UART port. (TODO: pinout?)
-* Power the board through the UART port (not the USB port or the 12V port).
-* Run `bin/sbv4-flash-fw` as described below.
+* Power the board through the USB port.
+* Run `bin/sbv4-flash-fw` as described below, pressing the button on the side of the board when instructed.
 
 ### `sbv4-flash-fw`
 

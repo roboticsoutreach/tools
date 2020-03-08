@@ -43,8 +43,16 @@ fi
 baked_image="$(mktemp)"
 "$tools_bin_dir/bake-serial-num" "$serial_num" < "$image" > "$baked_image"
 
+baud=57600
+
+# Hack hack hack, but this has been proven to avoid stm32flash failing with a
+# "Failed to init device." error.
+python -c "import serial; serial.Serial('$device', $baud, timeout=0.1).read(1024)"
+echo "Now press the button on the board, then hit Enter."
+read
+
 # Flash the board.
-sudo stm32flash -b 57600 -w "$baked_image" -v "$device"
+sudo stm32flash -b $baud -w "$baked_image" -v "$device"
 
 # Clean up the temporary baked image.
 rm -f "$baked_image"
