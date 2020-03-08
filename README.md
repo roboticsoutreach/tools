@@ -11,6 +11,7 @@ This README should document how to use each script, unless the script is large o
 * Connect the board to the computer via a USB-to-serial cable plugged into the 6-pin header in the corner. (TODO: pinout?)
 * Power the board through its 12V terminals.
 * Run `bin/pbv4-flash-fw` as described below.
+* Power-cycle the board to boot the new firmware.
 
 ### `pbv4-flash-fw`
 
@@ -37,6 +38,7 @@ This is a two-step process - one to configure the builtin USB interface IC and a
 * Press the button on the side of the board.
 * Run `bin/mcv4-flash-fw` as described below.
 * Run `bin/mcv4-flash-usbeeprom` as described below.
+* Reconnect both the USB and 12V connections to boot the new firmware and refresh USB metadata on the computer.
 
 ### `mcv4-flash-fw`
 
@@ -70,6 +72,7 @@ bin/mcv4-flash-usbeeprom SRO-AA2-3EB
 * Connect the board to the computer via a USB-to-serial cable plugged into the UART port. (TODO: pinout?)
 * Power the board through the USB port.
 * Run `bin/sbv4-flash-fw` as described below, pressing the button on the side of the board when instructed.
+* Power-cycle the board to boot the new firmware.
 
 ### `sbv4-flash-fw`
 
